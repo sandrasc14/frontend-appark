@@ -1,0 +1,108 @@
+<div [ngBusy]="{busy: maestroService.busy, message: 'Cargando producto...', backdrop: true}"></div>
+
+<div class="super_container">
+	<app-menu></app-menu>
+
+	<div class="container contact_container">
+		<div class="row">
+			<div class="col">
+				<div class="breadcrumbs d-flex flex-row align-items-center">
+					<ul>
+						<li><a href="index.html">Inicio</a></li>
+						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Quejas y
+								sugerencias</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-6 contact_col">
+				<div class="contact_contents">
+					<h1>Contáctenos</h1>
+					<p>
+						Hay muchas formas de contactarnos. Puede escribirnos una línea, llamarnos o enviarnos un correo
+						electrónico, elegir lo que más le convenga.</p>
+					<div>
+						<p>34951823046</p>
+						<p>fastparking@gmail.com</p>
+					</div>
+					<div>
+						<p>Horario de atención: 8.00am - 18.00pm de lunes a viernes.</p>
+						<p>Domingo: cerrado</p>
+					</div>
+				</div>
+
+
+				<div class="follow_us_contents">
+					<h1>Síguenos</h1>
+					<ul class="social d-flex flex-row">
+						<li><a href="/principal" style="background-color: #3a61c9"><i class="fa fa-facebook"
+									aria-hidden="true"></i></a></li>
+						<li><a href="/principal" style="background-color: #41a1f6"><i class="fa fa-twitter"
+									aria-hidden="true"></i></a></li>
+						<li><a href="/principal" style="background-color: #8f6247"><i class="fa fa-instagram"
+									aria-hidden="true"></i></a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="col-lg-6 get_in_touch_col">
+				<div class="get_in_touch_contents">
+					<h1>¡Póngase en contacto con nosotros!</h1>
+					<p>Rellene el siguiente formulario para recibir una información gratuita y confidencial.</p>
+					<form [formGroup]="suggestionForm">
+						<div>
+							<input formControlName="numberDocument" class="form_input input_name input_ph" type="text"
+								placeholder="N° documento" required="required">
+
+							<input formControlName="name" class="form_input input_name input_ph" type="text"
+								name="name" placeholder="Nombre" required="required">
+
+							<input formControlName="email" id="input_email" class="form_input input_email input_ph"
+								type="email" name="email" placeholder="Email" required="required">
+
+							<input formControlName="mobile" class="form_input input_name input_ph" type="text"
+								name="celular" placeholder="Celular" required="required">
+
+							<textarea formControlName="description" id="input_message" class="input_ph input_message"
+								name="message" placeholder="Por favor, escriba su sugerencia." rows="3" required
+								data-error="por favor, escriba su mensaje."></textarea>
+						</div>
+						<div>
+							<button id="review_submit" type="submit" class="red_button message_submit_btn trans_300"
+								(click)="saveSugerencia()">Enviar sugerencia</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="newsletter">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div
+						class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
+						<h4>Para notificarte de nuestras ofertas</h4>
+						<p>Suscribete y se te hara un descuento de 20% en tu primera compra</p>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div
+						class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
+						<input id="newsletter_email" type="email" placeholder="tu email" required="required"
+							data-error="Valid email is required.">
+						<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300"
+							value="Submit">suscribete</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<app-footer></app-footer>
+
+</div>

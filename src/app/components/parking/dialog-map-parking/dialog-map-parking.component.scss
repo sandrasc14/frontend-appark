@@ -1,0 +1,77 @@
+
+.py-3{
+    text-align:center;
+    font-weight: bold;
+    color: #2755A6;
+    font-size: 16px;
+}
+
+.mat-dialog-content{
+  max-height: 100%;
+}
+
+.content-dispatchs{
+  overflow-y: auto;
+  height: 440px;
+}
+
+.content-btn{
+    margin-top: 15px;
+}
+
+.return{
+  color: #2755A6;
+  font-weight: bold;
+  cursor: pointer;
+}
+  .map-container{
+    width: 100%;
+    display: flex;
+} 
+
+.address{
+  width: 90%;
+}
+
+.width-30{
+    width: 30%;
+}
+
+.width-70{
+  width: 70%;
+}
+
+.mat-dialog-actions {
+  padding: 0px !important;
+  margin-bottom: 0px;
+}
+
+.content-address{
+  margin-top: 10px;
+}
+
+  .dialog-close {
+    min-width: 16px !important;
+    float    : right !important;
+    cursor   : pointer;
+    display  : block;
+    height   : 16px;
+    padding  : 0 !important;
+    position : absolute;
+    right    : 21px;
+    top      : 10px;
+    width    : 16px;
+    min-width: 16px !important;
+    &:focus {
+      outline: none;
+    }
+
+    .mat-button-focus-overlay {
+      display: none;
+    }
+  
+
+  .mat-button-focus-overlay {
+    display: none;
+  }
+}

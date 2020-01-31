@@ -1,0 +1,23 @@
+<div>
+  <div class="header-fac">
+    <h2>Información de la sugerencia</h2>
+    <i (click)="onNoClick()" class="btn-cancel" class="fa fa-times btn-cancel" aria-hidden="true"></i>
+  </div>
+  <br><br><br>
+  <div mat-dialog-content>
+    <div class="container-fluid">
+      <div class="row">
+        <p class="info col-sm-4">Nombre:</p>
+        <p class="data col-sm-8">{{suggestion.name}}</p>
+        <p class="info col-sm-4">N° documento:</p>
+        <p class="data col-sm-8">{{suggestion.numberDocument}}</p>
+        <p class="info col-sm-4">Celular:</p>
+        <p class="data col-sm-8">{{suggestion.mobile}}</p>
+        <p class="info col-sm-4">Email:</p>
+        <p class="data col-sm-8">{{suggestion.email}}</p>
+        <p class="info col-sm-4">Sugerencia:</p>
+        <p class="data col-sm-8">{{suggestion.description}}</p> 
+      </div>
+    </div>
+  </div> 
+</div>

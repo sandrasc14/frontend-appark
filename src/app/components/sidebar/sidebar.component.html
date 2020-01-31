@@ -1,0 +1,89 @@
+<!-- <app-menu></app-menu> -->
+<div class="page-wrapper chiller-theme toggled">
+  <nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+      <div id="toggle-sidebar">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="sidebar-brand">
+        <a>fastParking</a>
+      </div>
+      <div class="sidebar-header">
+        <div class="user-pic">
+          <img class="img-fluid img-rounded" src="assets/img/perfil.jpg" alt="">
+        </div>
+        <div class="user-info">
+          <span class="name_user nombreu">{{identity? identity.name: ''}}</span>
+          <span *ngIf="identity && identity.role=='ROLE_ADMIN'" class="user-role">Administrador</span>
+          <span *ngIf="identity && identity.role=='ROLE_USER'" class="user-role">Usuario</span>
+          <span class="user-status">
+            <i class="fa fa-circle"></i>
+            <span>Online</span>
+          </span>
+        </div>
+      </div>
+      <div class="sidebar-search">
+        <div>
+          <div class="input-group">
+            <input type="text" class="form-control search-menu" placeholder="Buscar...">
+            <span class="input-group-addon">
+              <i class="fa fa-search"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-menu">
+        <ul>
+          <li class="header-menu" *ngIf="identity && identity.role=='ROLE_ADMIN'">
+            <span>Parkings</span>
+          </li>
+          <li class="" *ngIf="identity && identity.role=='ROLE_ADMIN'">
+            <a class="res_add" [routerLink]="['/administration/new-parking']">
+              <i class="fa fa-plus"></i>
+              <span>Nuevo parking</span>
+            </a>
+          </li>
+          <li class="res_add" *ngIf="identity && identity.role=='ROLE_ADMIN'">
+            <a [routerLink]="['/administration/mant-parking']">
+              <i class="fa fa-cog"></i>
+              <span>Mantenimiento</span>
+            </a>
+          </li>
+          <li class="header-menu">
+            <span>Resumen</span>
+          </li>
+          <li class="res_add" *ngIf="identity && identity.role=='ROLE_USER'">
+            <a [routerLink]="['/administration/compras']">
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              <span>Alquileres realizadas</span>
+            </a>
+          </li>
+          <li class="res_add" *ngIf="identity && identity.role=='ROLE_ADMIN'">
+            <a [routerLink]="['/administration/list-sugerencias']">
+              <i class="fa fa-list"></i>
+              <span>Quejas y sugerencias</span>
+            </a>
+          </li>
+          <li class="header-menu">
+            <span>Cuenta</span>
+          </li>
+          <li>
+            <a [routerLink]="['/login']" (click)="logout()" class="submenu-link">
+              <i class="fa fa-external-link-square" aria-hidden="true"></i>
+              <span>Cerrar sesión</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <main class="page-content">
+    <app-menu></app-menu>
+    <br> <br> <br> <br>
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -1,0 +1,31 @@
+<div>
+  <div class="header-fac">
+    <h2>Información del Parking</h2>
+    <i (click)="onNoClick()" class="btn-cancel" class="fa fa-times btn-cancel" aria-hidden="true"></i>
+  </div>
+  <br><br><br>
+  <div mat-dialog-content>
+    <div class="container-fluid">
+      <div class="row">
+        <p class="info col-sm-4">Nombre:</p>
+        <p class="data col-sm-8">{{parking.name}}</p>
+        <p class="info col-sm-4">Dirección:</p>
+        <p class="data col-sm-8">{{parking.address}}</p>
+        <p class="info col-sm-4">Activo:</p>
+        <p class="data col-sm-8">{{parking.accesibility? 'Si':'No'}}</p>
+        <p class="info col-sm-4">Latitud:</p>
+        <p class="data col-sm-8">{{parking.latitude}}</p>
+        <p class="info col-sm-4">Longitud:</p>
+        <p class="data col-sm-8">{{parking.longitude}}</p>
+        <p class="info col-sm-4">Plazas disponibles:</p>
+        <p class="data col-sm-8">{{parking.places}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-btn" align="center">
+    <button class="btn show-map" (click)="openDialogMap()">
+      Ver localización</button>
+  </div>
+
+</div>

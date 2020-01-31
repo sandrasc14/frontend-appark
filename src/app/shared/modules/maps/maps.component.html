@@ -1,0 +1,39 @@
+<agm-map
+  [latitude]="location.lat"
+  [longitude]="location.lng"
+  *ngIf="!multiple"
+  [zoom]="location.zoom"
+  [streetViewControl]="false"
+  [mapDraggable]="false"
+>
+<agm-marker [latitude]="location.lat" [longitude]="location.lng" [markerDraggable]="true" (dragEnd)="markerDragEnd($event)">
+  <agm-info-window [disableAutoPan]="false" *ngIf="geoAddress">
+    <span>{{geoAddress}}</span>
+  </agm-info-window>
+</agm-marker>
+</agm-map>
+
+<agm-map 
+  [latitude]="location.lat"
+  [longitude]="location.lng"
+  *ngIf="multiple"
+  [zoom]="12"
+  [streetViewControl]="false"
+> 
+  <agm-marker
+    *ngFor="let location of locations; let i = index"
+    [latitude]="location?.lat"
+    [longitude]="location?.lng"
+    label = "{{i+1}}"  
+  >
+    <agm-info-window [disableAutoPan]="false" #infoWindow>
+      <div>
+        <p><label><strong>Dirección:</strong></label>{{location.address.split('$%$').join(' ')}}</p>
+        <p><label><strong>Distrito:</strong></label>{{location.district}}</p>
+      </div>
+    </agm-info-window>
+  </agm-marker>
+</agm-map>
+
+
+
