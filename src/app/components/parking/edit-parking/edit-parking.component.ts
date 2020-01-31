@@ -62,7 +62,7 @@ export class EditParkingComponent implements OnInit {
           swal('Error', 'el parking no se guardo correctamente', 'warning');
         } else {
           swal('Parking registrado', 'Datos guardados correctamente', 'success').then(reponse => {
-            this.router.navigate(['/mant-parking']);
+            this.router.navigate(['/administration/mant-parking']);
           });
         }
       },
