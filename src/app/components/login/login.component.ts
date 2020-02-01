@@ -63,22 +63,14 @@ export class LoginComponent implements OnInit {
             },
 
             error => {
-              var erroMessage = <any>error;
-              if (erroMessage != null) {
-                var body = JSON.parse(error._body);
-                this.errorMessage = body.message;
-              }
+              this.errorMessage = error.message;
             }
           );
         }
       },
 
       error => {
-        var erroMessage = <any>error;
-        if (erroMessage != null) {
-          var body = JSON.parse(error._body);
-          this.errorMessage = body.message;
-        }
+        this.errorMessage = error.message;
       }
     );
   }

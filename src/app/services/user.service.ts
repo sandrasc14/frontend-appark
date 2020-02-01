@@ -46,7 +46,6 @@ export class UserService {
     if (gethash != null) {
       user_to_login.gethash = gethash;
     }
-    console.log(user_to_login);
     return this.apiService.post(this.url + 'loginUser', user_to_login)
       .map(res => res);
 

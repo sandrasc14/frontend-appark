@@ -11,10 +11,17 @@ import { ApiService } from './api.service';
 
 export class ParkingService {
 
-  public url: String;
+  private url: string;
+  private urlPulicParking: string;
 
   constructor(private apiService: ApiService) {
     this.url = GLOBAL.url;
+    this.urlPulicParking = GLOBAL.urlPulicParking;
+  }
+
+  getPublicParkings(): Observable<any> {
+    return this.apiService.get(this.urlPulicParking)
+      .map(res => res);
   }
 
   saveParking(token, parking: Parking): Observable<any> {

@@ -5,7 +5,7 @@ import { ParkingService } from 'src/app/services/parking.service';
 import { MaestroService } from 'src/app/services/maestro-service.service';
 import { Parking } from 'src/app/models/parking.model';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-parking',
@@ -14,10 +14,11 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class SearchParkingComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  displayedColumns: string[] = ['position', 'name', 'address', 'places'];
+  displayedColumns: string[] = ['position', 'name', 'address', 'places', 'available'];
   vehicleList = [];
   private ngUnsubscribe: Subject<boolean> = new Subject();
   dataSource: Parking[] = [];
+  locations: any[] = [];
   ratingList = [
     { viewValue: 'Muy bueno' },
     { viewValue: 'Bueno' },
@@ -41,13 +42,121 @@ export class SearchParkingComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.listparkings();
+    /*     this.listparkings(); */
     this.getListVehicles();
+    this.listPublicParkings();
   }
 
   ngOnDestroy() {
     this.ngUnsubscribe.next(true);
     this.ngUnsubscribe.unsubscribe();
+  }
+
+  listPublicParkings() {
+    this.locations = [];
+    this.maestroService.busy = this.parkingService.getPublicParkings().pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        response => {
+          this.locations = response.result.records.map(item => {
+            item.lat = item.latitude;
+            item.lng = item.longitude;
+            return item;
+          });
+          this.dataSource = this.locations;
+          this.locations = JSON.parse(JSON.stringify(this.locations));
+        }
+      );
+  }
+
+  filterParking() {
+    if (!this.form.controls['name'].value
+      && !this.form.controls['price'].value
+      && !this.form.controls['vehicle'].value
+      && !this.form.controls['places'].value
+      && !this.form.controls['address'].value
+    ) {
+      this.locations = this.dataSource;
+    } else {
+      if (this.form.controls['name'].value
+        && !this.form.controls['price'].value
+        && !this.form.controls['vehicle'].value
+        && !this.form.controls['places'].value
+        && !this.form.controls['address'].value) {
+        this.locations = this.locations.filter(value => value.nombre === this.form.controls['name'].value.trim());
+      } else {
+        if (
+          !this.form.controls['name'].value
+          && !this.form.controls['price'].value
+          && !this.form.controls['vehicle'].value
+          && this.form.controls['address'].value
+          && !this.form.controls['places'].value) {
+          this.locations = this.locations.filter(value => value.direccion === this.form.controls['address'].value.trim());
+        } else {
+          if (
+            !this.form.controls['name'].value
+            && !this.form.controls['price'].value
+            && !this.form.controls['vehicle'].value
+            && this.form.controls['places'].value
+            && !this.form.controls['address'].value) {
+            this.locations = this.locations.filter(value => value.libres === this.form.controls['places'].value.trim());
+          } else {
+            if (
+              this.form.controls['name'].value
+              && !this.form.controls['price'].value
+              && !this.form.controls['vehicle'].value
+              && !this.form.controls['places'].value
+              && this.form.controls['address'].value) {
+              this.locations = this.locations.filter(value =>
+                value.nombre === this.form.controls['name'].value.trim() &&
+                value.direccion === this.form.controls['address'].value.trim()
+              );
+            } else {
+              if (
+                this.form.controls['name'].value
+                && !this.form.controls['price'].value
+                && !this.form.controls['vehicle'].value
+                && this.form.controls['places'].value
+                && !this.form.controls['address'].value) {
+                this.locations = this.locations.filter(value =>
+                  value.nombre === this.form.controls['name'].value.trim() &&
+                  value.libres === this.form.controls['places'].value.trim()
+                );
+              } else {
+                if (
+                  !this.form.controls['name'].value
+                  && !this.form.controls['price'].value
+                  && !this.form.controls['vehicle'].value
+                  && this.form.controls['places'].value
+                  && this.form.controls['address'].value) {
+                  this.locations = this.locations.filter(value =>
+                    value.direccion === this.form.controls['address'].value.trim() &&
+                    value.libres === this.form.controls['places'].value.trim()
+                  );
+                } else {
+                  if (
+                    this.form.controls['name'].value
+                    && !this.form.controls['price'].value
+                    && !this.form.controls['vehicle'].value
+                    && this.form.controls['places'].value
+                    && this.form.controls['address'].value) {
+                    this.locations = this.locations.filter(value =>
+                      value.direccion === this.form.controls['address'].value.trim() &&
+                      value.libres === this.form.controls['places'].value.trim() &&
+                      value.nombre === this.form.controls['name'].value.trim()
+                    );
+                  } else {
+                    this.locations = this.dataSource;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    if (this.locations.length === 0) {
+      this.locations = this.dataSource;
+    }
   }
 
   listparkings() {
@@ -58,8 +167,6 @@ export class SearchParkingComponent implements OnInit, OnDestroy {
           if (response) {
             this.dataSource = response;
           }
-        },
-        error => {
         }
       );
   }

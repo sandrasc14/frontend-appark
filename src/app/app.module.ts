@@ -82,7 +82,7 @@ import { BenefitComponent } from './components/benefit/benefit.component';
     UserService,
     ApiService,
     VehicleService,
-    { provide: MAT_DATE_LOCALE, useValue: 'es-Pe' },
+    { provide: MAT_DATE_LOCALE, useValue: 'es-Es' },
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

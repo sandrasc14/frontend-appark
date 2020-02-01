@@ -38,8 +38,8 @@ export class MapsComponent implements OnInit, OnChanges {
   @ViewChild('street-view') streetView;
   public geocoder: any;
   location: Location = {
-    lat: -12.0655094,
-    lng: -77.041625,
+    lat: 36.7201614,
+    lng: -4.4203401,
     zoom: 16
   };
   geoAddress: string;
@@ -53,6 +53,7 @@ export class MapsComponent implements OnInit, OnChanges {
     // this.wrapper = wrapper;
   }
   ngOnInit() {
+    this.multipleMaps();
   }
 
   ngOnChanges() {
@@ -62,6 +63,18 @@ export class MapsComponent implements OnInit, OnChanges {
         lng: this.point.lng,
         zoom: 16
       };
+    }
+  }
+
+  multipleMaps() {
+    if (this.multiple) {
+      for (const location of this.locations) {
+        if (location.lat && location.lng) {
+          this.location.lat = location.lat;
+          this.location.lng = location.lng;
+          break;
+        }
+      }
     }
   }
 

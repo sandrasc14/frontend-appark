@@ -13,9 +13,9 @@ export class ApiService {
   ) { }
 
   public formatErrors(error: HttpErrorResponse) {
-    const messageError = error.error ? error.error : error;
+    let messageError = error.error ? error.error : error;
     // this.snackbarService.show(messageError, 'error');
-    swal('Error', messageError, 'warning');
+    swal('Error', messageError, 'error');
     return throwError(messageError);
   }
 
